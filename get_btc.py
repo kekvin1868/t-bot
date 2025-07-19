@@ -26,8 +26,13 @@ if __name__ == "__main__":
     print(f"Last Price: {ticker['last']}")
     print(f"Bid Price (highest buy offer): {ticker['bid']}")
     print(f"Ask Price (lowest sell offer): {ticker['ask']}")
-    print(f"24h Volume (BTC): {ticker['baseVolume']}") # Volume in BTC
-    print(f"24h Volume (USDT): {ticker['quoteVolume']}") # Volume in USDT
+    
+    # Total amount of BTC being traded in a day
+    print(f"24h Volume (BTC): {ticker['baseVolume']:,.2f}") # Volume in BTC
+
+    # Total amount of USDT being traded in a day
+    print(f"24h Volume (USDT): {ticker['quoteVolume']:,.2f}") # Volume in USDT
+
     print(f"Timestamp (UTC): {exchange.iso8601(ticker['timestamp'])}")
 
   except ccxt.ExchangeError as e:
