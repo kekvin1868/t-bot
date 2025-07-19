@@ -24,14 +24,28 @@ if __name__ == "__main__":
     print("--- Current BTC/USDT Ticker ---")
     print(f"Symbol: {ticker['symbol']}")
     print(f"Last Price: {ticker['last']}")
-    print(f"Bid Price (highest buy offer): {ticker['bid']}")
+    
+    # Highest buy offer
+    print(f"Bid Price: {ticker['bid']}")
+    
+    # Lowest sell offer
     print(f"Ask Price (lowest sell offer): {ticker['ask']}")
     
     # Total amount of BTC being traded in a day
-    print(f"24h Volume (BTC): {ticker['baseVolume']:,.2f}") # Volume in BTC
+    base_volume = ticker.get('baseVolume')
+
+    # Fallback if failed to return or is empty.
+    if(base_volume) is None or not isinstance(base_volume, (int, float)):
+      base_volume = 0.0
+    print(f"24h Volume (BTC): {ticker['baseVolume']:,.2f}")
 
     # Total amount of USDT being traded in a day
-    print(f"24h Volume (USDT): {ticker['quoteVolume']:,.2f}") # Volume in USDT
+    quote_volume = ticker.get('quoteVolume')
+
+    # Fallback if failed to return or is empty.
+    if(quote_volume) is None or not isinstance(quote_volume, (int, float)):
+      quote_volume = 0.0
+    print(f"24h Volume (USDT): {ticker['quoteVolume']:,.2f}")
 
     print(f"Timestamp (UTC): {exchange.iso8601(ticker['timestamp'])}")
 
